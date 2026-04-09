@@ -1,0 +1,9 @@
+# Run these commands to set up venv and install needed dependencies
+###### python3 -m venv venv
+###### source venv/bin/activate
+###### pip install -r requirements.txt
+
+
+# add your import modules to requirement.txt with the following command after installing and import to your venv
+# pip freeze > requirements.txt
+mysql-connector-python==9.4.0
