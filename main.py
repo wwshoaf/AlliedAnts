@@ -1,6 +1,8 @@
 # Build main.py top-level CLI menu
 # Imports all modules · loops until exit · routes to submenus
-    
+import time
+
+
 # Greetings
 print("Welcome to YOGA Studio Management System.")
 print("  a product of Allied Ants @2026\n")
@@ -9,6 +11,9 @@ print("  a product of Allied Ants @2026\n")
 state_flag = 'root'
 
 while 1:
+    # Give user time to read any error message
+    time.sleep(0.5)
+
     match state_flag:
         # Default menu
         case 'root':
@@ -54,6 +59,13 @@ while 1:
                 case _: 
                     print('Invalid input. Please try again.')
                     continue
+        case 'query_person':
+            print('')
+        case 'query_Class':
+            print('')
+        case 'query_Transaction':
+            print('')
+            
         # Primary
         case 'update':
             print("Please choose what you want to add or update:")
@@ -76,6 +88,13 @@ while 1:
                 case _: 
                     print('Invalid input. Please try again.')
                     continue
+        case 'update_person':
+            print('')
+        case 'update_class':
+            print('')
+        case 'update_trans':
+            print('')
+
         # Primary
         case 'reports':
             print("Please choose which report to generate:")
@@ -98,7 +117,14 @@ while 1:
                 case _: 
                     print('Invalid input. Please try again.')
                     continue
-        
+        case 'reports_rev':
+            print('')
+        case 'reports_teach':
+            print('')
+        case 'reports_attn':
+            print('')
+
+
         # catch fall through
         case _:
             print("Unsupported function. Returning to main menu...")
