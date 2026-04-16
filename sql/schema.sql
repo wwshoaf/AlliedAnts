@@ -2,6 +2,13 @@
 Write all DDL CREATE TABLE scripts
 sql/schema.sql · Person, Teacher, Customer, Class, Sale, PersonClass
 */
+DROP TABLE IF EXISTS Sale;
+DROP TABLE IF EXISTS PersonClass;
+DROP TABLE IF EXISTS Class;
+DROP TABLE IF EXISTS Customer;
+DROP TABLE IF EXISTS Teacher;
+DROP TABLE IF EXISTS Person;
+
 CREATE TABLE Person (
    name VARCHAR(25) NOT NULL,
    phone VARCHAR(11) NOT NULL, 
@@ -23,34 +30,34 @@ CREATE TABLE Customer (
     payment_method VARCHAR(50),
     PRIMARY KEY (name, phone),
     FOREIGN KEY (name, phone) REFERENCES Person(name, phone)
-)
+);
 
 CREATE TABLE Class (
-    date DATE NOT NULL,
-    time TIME NOT NULL,
+    class_date DATE NOT NULL,
+    class_time TIME NOT NULL,
     class_type VARCHAR(50) NOT NULL,
     duration INT,
     attendance INT NOT NULL,
-    PRIMARY KEY (date, time)
+    PRIMARY KEY (class_date, class_time)
 );
 
 CREATE TABLE PersonClass (
     name VARCHAR(25) NOT NULL,
     phone VARCHAR(11) NOT NULL, 
-    date DATE NOT NULL,
-    time TIME NOT NULL,
-    PRIMARY KEY (name, phone, date, time),
+    pc_date DATE NOT NULL,
+    pc_time TIME NOT NULL,
+    PRIMARY KEY (name, phone, pc_date, pc_time),
     FOREIGN KEY (name, phone) REFERENCES Person(name, phone),
-    FOREIGN KEY (date, time) REFERENCES Class(date, time)
+    FOREIGN KEY (pc_date, pc_time) REFERENCES Class(class_date, class_time)
 );
 
 CREATE TABLE Sale (
-    transaction_id INT,
+    transaction_id INT AUTO_INCREMENT,
     name VARCHAR(25) NOT NULL,
     phone VARCHAR(11) NOT NULL, 
     date DATE,
     time TIME,
     price DECIMAL(10, 2),
-    PRIMARY KEY (name, phone),
+    PRIMARY KEY (transaction_id),
     FOREIGN KEY (name, phone) REFERENCES Customer(name, phone)
 );
