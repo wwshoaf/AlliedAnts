@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class = "page-header">
+    <h1>Customers</h1>
+    <a href = "/customers/add" class = "btn">+ Add Customer</a>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Payment Method</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for name, phone, email, payment in customers %}
+        <tr>
+            <td>{{ name }}</td>
+            <td>{{ phone }}</td>
+            <td>{{ email }}</td>
+            <td>{{ payment }}</td>
+            <td>
+                <a href="/customers/update/{{ name }}/{{ phone  }}">Edit</a>
+                <a href="/customers/delete/{{ name }}/{{ phone  }}"
+                onclick=""return confirm('Delete' {{ name  }}?)"">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
