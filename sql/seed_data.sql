@@ -39,7 +39,7 @@ INSERT INTO Customer (name, phone, payment_method) VALUES
   ('Fatima Hassan',  '6795550209', 'annual'),
   ('Tyler Brooks',   '9995550210', 'monthly');
 
-INSERT INTO Class (date, time, class_type, duration, attendance) VALUES
+INSERT INTO Class (class_date, class_time, class_type, duration, attendance) VALUES
   ('2024-01-10', '09:00:00', 'Yoga',          60, 20),
   ('2024-01-11', '10:30:00', 'Pilates',       45, 18),
   ('2024-01-12', '12:00:00', 'Zumba',         30, 22),
@@ -50,7 +50,7 @@ INSERT INTO Class (date, time, class_type, duration, attendance) VALUES
   ('2024-01-17', '08:00:00', 'Barre',         45, 23),
   ('2024-01-18', '11:00:00', 'Dance Cardio',  30, 17);
 
-INSERT INTO PersonClass (name, phone, date, time) VALUES
+INSERT INTO PersonClass (name, phone, pc_date, pc_time) VALUES
   -- Teachers linked to the classes they instruct
   ('Emily Smith',   '3045550101', '2024-01-10', '09:00:00'),
   ('David Johnson', '1115550102', '2024-01-11', '10:30:00'),
@@ -73,7 +73,7 @@ INSERT INTO PersonClass (name, phone, date, time) VALUES
   ('Fatima Hassan',  '6795550209', '2024-01-13', '14:00:00'),
   ('Tyler Brooks',   '9995550210', '2024-01-18', '11:00:00');
 
-INSERT INTO Sale (transaction_id, name, phone, date, time, price) VALUES
+INSERT INTO Sale (transaction_id, name, phone, sale_date, sale_time, price) VALUES
   (1,  'Jordan Mills',   '3045550201', '2024-01-10', '09:00:00', 199.99),
   (2,  'Alex Turner',    '1165550202', '2024-01-11', '10:30:00', 500.00),
   (3,  'Priya Patel',    '5525550203', '2024-01-12', '12:00:00',  18.99),
