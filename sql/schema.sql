@@ -55,8 +55,8 @@ CREATE TABLE Sale (
     transaction_id INT AUTO_INCREMENT,
     name VARCHAR(25) NOT NULL,
     phone VARCHAR(11) NOT NULL, 
-    date DATE,
-    time TIME,
+    sale_date DATE,
+    sale_time TIME,
     price DECIMAL(10, 2),
     PRIMARY KEY (transaction_id),
     FOREIGN KEY (name, phone) REFERENCES Customer(name, phone)
