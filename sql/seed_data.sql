@@ -40,15 +40,15 @@ INSERT INTO Customer (name, phone, payment_method) VALUES
   ('Tyler Brooks',   '9995550210', 'monthly');
 
 INSERT INTO Class (class_date, class_time, class_type, duration, attendance) VALUES
-  ('2024-01-10', '09:00:00', 'Yoga',          60, 20),
-  ('2024-01-11', '10:30:00', 'Pilates',       45, 18),
-  ('2024-01-12', '12:00:00', 'Zumba',         30, 22),
-  ('2024-01-13', '14:00:00', 'Spin',          60, 15),
-  ('2024-01-14', '16:00:00', 'HIIT',          45, 25),
-  ('2024-01-15', '18:00:00', 'Boxing',        30, 19),
-  ('2024-01-16', '19:30:00', 'CrossFit',      60, 21),
-  ('2024-01-17', '08:00:00', 'Barre',         45, 23),
-  ('2024-01-18', '11:00:00', 'Dance Cardio',  30, 17);
+  ('2024-01-10', '09:00:00', 'Restore',    60, 20),
+  ('2024-01-11', '10:30:00', 'Barre',      45, 18),
+  ('2024-01-12', '12:00:00', 'Hot',        30, 22),
+  ('2024-01-13', '14:00:00', 'Yin',        60, 15),
+  ('2024-01-14', '16:00:00', 'Barre',      45, 25),
+  ('2024-01-15', '18:00:00', 'Hot',        30, 19),
+  ('2024-01-16', '19:30:00', 'Nidra',      60, 21),
+  ('2024-01-17', '08:00:00', 'Barre',      45, 23),
+  ('2024-01-18', '11:00:00', 'Restore',    30, 17);
 
 INSERT INTO PersonClass (name, phone, pc_date, pc_time) VALUES
   -- Teachers linked to the classes they instruct
