@@ -2,6 +2,7 @@
 # modules/classes.py — Class & enrollment CRUD
 # Schedule class · enroll/drop student · list by date or teacher
 
+
 from db import fetch_all, fetch_one, execute_query
 
 def create_class(class_date, class_time, class_type, duration=None, attendance=0):
