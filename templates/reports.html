@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
+
 <div>
-    <!-- options -->
+    <!-- user options -->
+    <!-- every time user hits a button, page refreshes to display ONLY lastest requested info -->
 
     <form action="/reports/revenue" method="get">
         <label for="rst">Start date:</label>
@@ -10,6 +12,7 @@
         <input type="date" id="red" name='ed' required>
         <input class="btn" type="submit" value="Revenue by period">
     </form>
+    <!-- only print table if it's requested and available -->
     {% if rev %}
         <table>
             <tr>
@@ -19,6 +22,8 @@
                 <th>{{ rev[1] }}</th>
             </tr>
         </table>
+        <!-- extra whitespace -->
+        <p></p>
     {% endif %}
 
     <form action="/reports/trans" method="get">
@@ -47,6 +52,8 @@
             </tr>
         {% endfor %}
         </table>
+        <!-- extra whitespace -->
+        <p></p>
     {% endif %}
 
     <form action="/reports/teacher_KPI" method="get">
@@ -68,6 +75,8 @@
             </tr>
         {% endfor %}
         </table>
+        <!-- extra whitespace -->
+        <p></p>
     {% endif %}
 
     <form action="/reports/attn" method="get">

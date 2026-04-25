@@ -78,9 +78,10 @@ def sales_list():
 @app.route("/reports")
 def reports_page():
     return render_template("reports.html")
-
+# activated to update page when user hitting buttons
 @app.route("/reports/revenue")
 def reports_page_rev():
+    # .args.get() only works for GET, use .form[''] for POST
     start = request.args.get('st')
     end = request.args.get('ed')
     return render_template("reports.html", rev = reports.revenue_by_date(start, end))
