@@ -77,9 +77,27 @@ def sales_list():
 # reports
 @app.route("/reports")
 def reports_page():
-    revenue = reports.revenue_by_date()
-    attendance = reports.attendance_report()
-    return render_template("reports.html", revenue = revenue, attendance = attendance)
+    return render_template("reports.html")
+
+@app.route("/reports/revenue")
+def reports_page_rev():
+    start = request.args.get('st')
+    end = request.args.get('ed')
+    return render_template("reports.html", rev = reports.revenue_by_date(start, end))
+
+@app.route("/reports/trans")
+def reports_page_trans():
+    start = request.args.get('st')
+    end = request.args.get('ed')
+    return render_template("reports.html", trans = reports.all_trans(start, end))
+
+@app.route("/reports/teacher_KPI")
+def reports_page_teacher():
+    return render_template("reports.html", teacher = reports.classes_per_teacher())
+
+@app.route("/reports/attn")
+def reports_page_attn():
+    return render_template("reports.html", attn=reports.attendance_report())
 
 # run
 if __name__ == "__main__":

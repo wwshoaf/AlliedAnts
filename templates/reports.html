@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+    <!-- options -->
+
+    <form action="/reports/revenue" method="get">
+        <label for="rst">Start date:</label>
+        <input type="date" id="rst" name='st' required>
+        <label for="red">End date:</label>
+        <input type="date" id="red" name='ed' required>
+        <input class="btn" type="submit" value="Revenue by period">
+    </form>
+    {% if rev %}
+        <table>
+            <tr>
+                <th>Transaction Counts</th>
+                <th>{{ rev[0] }}</th>
+                <th>Total Revenue</th>
+                <th>{{ rev[1] }}</th>
+            </tr>
+        </table>
+    {% endif %}
+
+    <form action="/reports/trans" method="get">
+        <label for="tst">Start date:</label>
+        <input type="date" id="tst" name="st" required>
+        <label for="ted">End date:</label>
+        <input type="date" id="ted" name='ed' required>
+        <input class="btn" type="submit" value="Transactions lookup">
+    </form>
+    {% if trans %}
+        <table>
+            <tr>
+                <th>transaction_id</th>
+                <th>name</th>
+                <th>phone</th>
+                <th>date</th>
+                <th>time</th>
+                <th>amount</th>
+            </tr>
+        
+        {% for r in trans %}
+            <tr>
+                {% for x in r %}
+                    <td>{{ x }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+
+    <form action="/reports/teacher_KPI" method="get">
+        <button class="btn" type="submit" value="Classes per teacher">Classes per teacher</button>
+    </form>
+    {% if teacher %}
+        <table>
+            <tr>
+                <th>name</th>
+                <th>phone</th>
+                <th>number_of_classes_taught</th>
+            </tr>
+        
+        {% for r in teacher %}
+            <tr>
+                {% for x in r %}
+                    <td>{{ x }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+
+    <form action="/reports/attn" method="get">
+        <button  class="btn" type="submit" value="Attendance lookup">Attendance lookup</button>
+    </form>
+    {% if attn %}
+        <table>
+            <tr>
+                <th>date</th>
+                <th>time</th>
+                <th>type</th>
+                <th>duration</th>
+                <th>attendance</th>
+            </tr>
+        
+        {% for r in attn %}
+            <tr>
+                {% for x in r %}
+                    <td>{{ x }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
+</div>
+
+{% endblock %}

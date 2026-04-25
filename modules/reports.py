@@ -3,7 +3,7 @@
 from db import fetch_all, fetch_one
 
 # total transaction count and revenue within a time period
-def revenue(start, end):
+def revenue_by_date(start, end):
     return fetch_one("""
     SELECT COUNT(*), SUM(price)
     FROM Sale
@@ -24,13 +24,13 @@ def classes_per_teacher():
     return fetch_all("""
     SELECT *
     FROM Teacher
-    ORDER BY number_of_classes_taught
+    ORDER BY number_of_classes_taught DESC
     """)
 
 # attendance rank across all classes
-def class_attendance():
+def attendance_report():
     return fetch_all("""
     SELECT *
     FROM Class
-    ORDER BY attendance
+    ORDER BY attendance DESC
     """)
