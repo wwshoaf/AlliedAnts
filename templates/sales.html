@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-header">
+    <h1>Sales</h1>
+    <a href="/sales/add" class="btn">+ Add Sale</a>
+</div>
+
+<!-- Sales list table -->
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Customer</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for sale in sales %}
+        <tr>
+            <td>{{ sale[1] }}</td>
+            <td>{{ sale[2] }}</td>
+            <td>${{ "%.2f"|format(sale[3]) }}</td>
+            <td>
+                <a href="/sales/{{ sale[0] }}/edit" class="btn btn-sm">Edit</a>
+                <a href="/sales/{{ sale[0] }}/delete" class="btn btn-sm btn-danger" onclick="return confirm('Delete this sale?')">Delete</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="4">No sales recorded</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Add sale form -->
+{% if show_add_form %}
+<div class="form-card">
+    <h2>Add Sale</h2>
+    <form method="POST" action="/sales/add">
+        <label>Date</label>
+        <input type="date" name="sale_date" required>
+
+        <label>Time (optional)</label>
+        <input type="time" name="sale_time">
+
+        <label>Customer Name</label>
+        <input type="text" name="customer_name" placeholder="Full name" required>
+
+        <label>Customer Phone</label>
+        <input type="text" name="customer_phone" placeholder="e.g. 3045555555" required>
+
+        <label>Amount</label>
+        <input type="number" name="amount" placeholder="0.00" step="0.01" required>
+
+        <button type="submit" class="btn">Record Sale</button>
+        <a href="/sales" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endif %}
+
+<!-- Edit sale form -->
+{% if show_edit_form %}
+<div class="form-card">
+    <h2>Edit Sale #{{ edit_id }}</h2>
+    <form method="POST" action="/sales/{{ edit_id }}/edit">
+        <label>Customer</label>
+        <input type="text" value="{{ edit_sale[1] }}" disabled>
+
+        <label>New Amount</label>
+        <input type="number" name="amount" value="{{ edit_sale[3] }}" step="0.01" required>
+
+        <button type="submit" class="btn">Update Sale</button>
+        <a href="/sales" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endif %}
+
+{% endblock %}

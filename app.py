@@ -119,6 +119,44 @@ def sales_list():
     rows = sales.list_sales()
     return render_template("sales.html", sales=rows)
 
+@app.route("/sales/add", methods=["GET", "POST"])
+def add_sale():
+    if request.method == "POST":
+        success, msg = sales.record_sale(
+            name=request.form["customer_name"],
+            phone=request.form["customer_phone"],
+            sale_date=request.form["sale_date"],
+            sale_time=request.form.get("sale_time", "00:00"),
+            price=request.form["amount"]
+        )
+        flash(msg, "success" if success else "error")
+        return redirect(url_for("sales_list"))
+    return render_template("sales.html", sales=[], show_add_form=True)
+
+@app.route("/sales/<int:transaction_id>/edit", methods=["GET", "POST"])
+def edit_sale(transaction_id):
+    sale = sales.get_sale(transaction_id)
+    if not sale:
+        flash("Sale not found", "error")
+        return redirect(url_for("sales_list"))
+
+    if request.method == "POST":
+        success, msg = sales.update_sale_price(
+            transaction_id=transaction_id,
+            new_price=request.form["amount"]
+        )
+        flash(msg, "success" if success else "error")
+        return redirect(url_for("sales_list"))
+
+    return render_template("sales.html", sales=[], show_edit_form=True,
+                          edit_sale=sale, edit_id=transaction_id)
+
+@app.route("/sales/<int:transaction_id>/delete", methods=["GET", "POST"])
+def delete_sale(transaction_id):
+    success, msg = sales.delete_sale(transaction_id)
+    flash(msg, "success" if success else "error")
+    return redirect(url_for("sales_list"))
+
 # reports
 @app.route("/reports")
 def reports_page():

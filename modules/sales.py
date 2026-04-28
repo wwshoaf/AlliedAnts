@@ -1,7 +1,10 @@
 # modules/sales.py — Sale CRUD + purchase transaction
 # Record sale · update payment · delete · wrap INSERT in transaction
 
-from db import fetch_one, execute_query, get_connection
+from db import fetch_one, fetch_all, execute_query, get_connection
+
+def list_sales():
+    return fetch_all("SELECT transaction_id, sale_date, name, price FROM Sale ORDER BY sale_date DESC")
 
 def get_sale(transaction_id):
     return fetch_one(
