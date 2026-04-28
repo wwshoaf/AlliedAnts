@@ -8,42 +8,42 @@ from db import fetch_all, fetch_one, execute_query
 def list_customers():
     # return all customers as tuple list
     return fetch_all("""
-        SELECT p.Name, p.Phone, p.Email, c.PaymentMethod
-        FROM Person p
-        JOIN Customer c ON p.NAME AND p.Phone = c.Phone
-        ORDER BY p.Name
+        SELECT p.name, p.phone, p.email, c.payment_method
+        FROM person p
+        JOIN customer c ON p.name = c.name AND p.phone = c.phone
+        ORDER BY p.name
                      """)
 
 def list_teachers():
     # all teachers as tuple list
     return fetch_all("""
-        SELECT p.Name, p.Phone, p.Email
-        FROM Person p
-        JOIN Teacher t ON p.NAME AND p.Phone = t.Phone
-        ORDER BY p.Name
+        SELECT p.name, p.phone, p.email
+        FROM person p
+        JOIN teacher t ON p.name AND p.phone = t.phone
+        ORDER BY p.name
                      """)
 
 def get_person(name, phone):
     return fetch_one("""
-                     SELECT Name, Phone, Email
-                     FROM Person
-                     WHERE Name = %s AND Phone = %s
+                     SELECT name, phone, email
+                     FROM person
+                     WHERE name = %s AND phone = %s
                      """, (name, phone))
 
 # create operations
 def add_customer(name, phone, email, payment):
     if get_person(name, phone):
-        return False, "Customer already exists"
+        return False, "customer already exists"
     execute_query("" \
-        "INSERT INTO Person (Name, Phone, Email) " \
+        "INSERT INTO person (Name, Phone, Email) " \
         "VALUES (%s, %s, %s)", 
         (name, phone, email))
     execute_query("" \
-        "INSERT INTO Customer (Name, Phone, PaymentMethod) " \
+        "INSERT INTO customer (Name, Phone, PaymentMethod) " \
         "VALUES (%s, %s, %s)", 
         (name, phone, payment))
     
-    return True, f"Customer {name} added successfully"
+    return True, f"customer {name} added successfully"
 
 
 def add_teacher(name, phone, email):
