@@ -65,8 +65,53 @@ def add_teacher():
 # classes
 @app.route("/classes")
 def class_list():
-    rows = classes.list_classes()
+    rows = classes.list_classes_by_date()
     return render_template("classes.html", classes=rows)
+
+@app.route("/classes/add", methods=["GET", "POST"])
+def add_class():
+    if request.method == "POST":
+        success, msg = classes.create_class(
+            class_date=request.form["class_date"],
+            class_time=request.form["class_time"],
+            class_type=request.form["class_type"],
+            duration=request.form["duration"]
+        )
+        flash(msg, "success" if success else "error")
+        return redirect(url_for("class_list"))
+    return render_template("classes.html", classes=[], show_add_form=True)
+
+@app.route("/classes/<class_date>/<class_time>/enroll", methods=["GET", "POST"])
+def enroll_student(class_date, class_time):
+    if request.method == "POST":
+        success, msg = classes.enroll_customer(
+            name=request.form["name"],
+            phone=request.form["phone"],
+            class_date=class_date,
+            class_time=class_time
+        )
+        flash(msg, "success" if success else "error")
+        return redirect(url_for("class_list"))
+    return render_template("classes.html", classes=[], show_enroll_form=True, enroll_date=class_date, enroll_time=class_time)
+
+@app.route("/classes/<class_date>/<class_time>/drop", methods=["GET", "POST"])
+def drop_student(class_date, class_time):
+    if request.method == "POST":
+        success, msg = classes.drop_customer(
+            name=request.form["name"],
+            phone=request.form["phone"],
+            class_date=class_date,
+            class_time=class_time
+        )
+        flash(msg, "success" if success else "error")
+        return redirect(url_for("class_list"))
+    return render_template("classes.html", classes=[], show_drop_form=True, drop_date=class_date, drop_time=class_time)
+
+@app.route("/classes/<class_date>/<class_time>/delete")
+def delete_class(class_date, class_time):
+    success, msg = classes.delete_class(class_date, class_time)
+    flash(msg, "success" if success else "error")
+    return redirect(url_for("class_list"))
 
 # sales
 @app.route("/sales")

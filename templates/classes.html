@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class = "page-header">
+    <h1>Classes</h1>
+    <a href = "/classes/add" class = "btn">+ Add Class</a>
+</div>
+
+<!-- Flash messages handled in base.html  -->
+
+<!-- class list -->
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for c in classes %}
+        <tr>
+            <td>{{ c[0] }}</td>
+            <td>{{ c[1] }}</td>
+            <td>{{ c[2] }}</td>
+            <td>
+                <a href="/classes/{{ c[0] }}/{{ c[1] }}/enroll" class="btn btn-sm">Enroll Student</a>
+                <a href="/classes/{{ c[0] }}/{{ c[1] }}/drop" class="btn btn-sm btn-danger">Drop Student</a>
+                <a href="/classes/{{ c[0] }}/{{ c[1] }}/delete" class="btn btn-sm btn-danger" onclick="return confirm('Delete {{ c[2] }}?')">Delete</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="4">No classes available</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+        
+<!-- add class form -->
+{% if show_add_form %}
+<div class="form-card">
+    <h2>Add Class</h2>
+    <form method="POST" action="/classes/add">
+        <label>Date</label>
+        <input type="date" name="class_date" required>
+
+        <label>Time</label>
+        <input type="time" name="class_time" required>
+
+        <label>Type</label>
+        <input type="text" name="class_type" placeholder="e.g. Vinyasa, Hatha" required>
+
+        <label>Duration(minutes)</label>
+        <input type="number" name="duration" required>
+
+        <button type="submit" class="btn">Create Class</button>
+        <a href="/classes" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endif %}
+
+<!-- enroll student form -->
+{% if show_enroll_form %}
+<div class="form-card">
+    <h2>Enroll Student in {{ enroll_date }} at {{ enroll_time }}</h2>
+    <form method="POST" action="/classes/{{ enroll_date }}/{{ enroll_time }}/enroll">
+        <label>Student Name</label>
+        <input type="text" name="name" placeholder="Full name" required>
+
+        <label>Phone</label>
+        <input type="text" name="phone" placeholder="e.g. 3045555555" required>
+
+        <button type="submit" class="btn">Enroll Student</button>
+        <a href="/classes" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endif %}
+
+<!-- drop student form -->
+{% if show_drop_form %}
+<div class="form-card">
+    <h2>Drop Student from {{ drop_date }} at {{ drop_time }}</h2>
+    <form method="POST" action="/classes/{{ drop_date }}/{{ drop_time }}/drop">
+        <label>Student Name</label>
+        <input type="text" name="name" placeholder="Full name" required>
+
+        <label>Phone</label>
+        <input type="text" name="phone" placeholder="e.g. 3045555555" required>
+
+        <button type="submit" class="btn btn-danger">Drop Student</button>
+        <a href="/classes" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endif %}
+
+{% endblock %}

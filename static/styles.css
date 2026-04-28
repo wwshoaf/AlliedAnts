@@ -104,3 +104,87 @@ form .btn {
     cursor: pointer;
     border: none;
 }
+
+/* Enrollment sub-table */
+.enrollment-row { background: var(--color-background-secondary, #f9f9f9);}
+
+.enrollment-block{
+    padding: 10px 16px;
+    font-size: 13px;
+}
+
+.enrollment-block strong{
+    display: block;
+    margin-bottom: 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: #666
+}
+
+.inner-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 4px;
+}
+
+.inner-table th, .inner-table td {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+    font-size: 13px;
+}
+
+.inner-table th {
+    background: #f0f0f0;
+    font-weight: 600;
+}
+
+/* Attendance status */
+.attendance-status {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 99px;
+    font-weight: 500;
+}
+
+.attendance-status.present {
+    background: #d4edda;
+    color: #155724;
+}
+
+.attendance-status.absent {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+/* form card */
+.form-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    margin-top: 20px;
+    max-width: 480px;
+}
+
+.form-card h2 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 18px;
+}
+
+/* Button variants */
+.btn-sm {
+    padding: 4px 10px;
+    font-size: 12px;
+    margin-right: 4px;
+}
+
+.btn-danger {
+    background: #e74c3c;
+}
+
+.btn-secondary {
+    background: #7f8c8d;
+}  
