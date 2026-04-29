@@ -4,7 +4,12 @@
 from db import fetch_one, fetch_all, execute_query, get_connection
 
 def list_sales():
-    return fetch_all("SELECT transaction_id, sale_date, name, price FROM Sale ORDER BY sale_date DESC")
+    rows = fetch_all("""
+        SELECT transaction_id, name, phone, sale_date, sale_time, price, payment_method, buyer, type 
+        FROM Sale 
+        ORDER BY sale_date DESC""")
+
+    return [(r[0], r[1], r[2], r[3], r[4], float(r[5]), r[6], r[7], r[8]) for r in rows] if rows else []
 
 def get_sale(transaction_id):
     return fetch_one(
@@ -13,7 +18,7 @@ def get_sale(transaction_id):
     )
 
 # Record sale
-def record_sale(name, phone, sale_date, sale_time, price,
+def record_sale(name, phone, sale_date, sale_time, price, payment_method=None, buyer=None, sale_type=None,
                 class_date=None, class_time=None):
     customer = fetch_one(
         "SELECT name FROM Customer WHERE name = %s AND phone = %s",
@@ -28,9 +33,9 @@ def record_sale(name, phone, sale_date, sale_time, price,
     try:
         cursor = conn.cursor()
         cursor.execute(
-            "INSERT INTO Sale (name, phone, sale_date, sale_time, price) "
-            "VALUES (%s, %s, %s, %s, %s)",
-            (name, phone, sale_date, sale_time, price)
+            "INSERT INTO Sale (name, phone, sale_date, sale_time, price, payment_method, buyer, type) "
+            "VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
+            (name, phone, sale_date, sale_time, price, payment_method, buyer, sale_type)
         )
         # optionally enroll customer in a class in the same transaction
         if class_date and class_time:
@@ -39,6 +44,7 @@ def record_sale(name, phone, sale_date, sale_time, price,
                 "VALUES (%s, %s, %s, %s)",
                 (name, phone, class_date, class_time)
             )
+
         conn.commit()
         return True, f"Sale recorded for {name} — ${price}"
     except Exception as e:
@@ -52,10 +58,13 @@ def record_sale(name, phone, sale_date, sale_time, price,
 def update_sale_price(transaction_id, new_price):
     if not get_sale(transaction_id):
         return False, "No sale with that transaction ID"
-    execute_query(
+    result = execute_query(
         "UPDATE Sale SET price = %s WHERE transaction_id = %s",
         (new_price, transaction_id)
     )
+    if result is None:
+        return False, "Failed to update sale price"
+    
     return True, f"Sale {transaction_id} updated to ${new_price}"
 
 

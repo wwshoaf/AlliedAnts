@@ -11,10 +11,10 @@
 <table>
     <thead>
         <tr>
-            <th>ID</th>
             <th>Date</th>
             <th>Customer</th>
             <th>Amount</th>
+            <th>Type</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -72,15 +72,7 @@
     </form>
 </div>
 {% endif %}
-<script>
-    // use today's date as placeholder
-    const d = new Date();
-    const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, "0");
-    const day = String(d.getDate()).padStart(2, "0");
-    const today = `${year}-${month}-${day}`;
-    document.getElementById("date").value = today;
-</script>
+
 <!-- Edit sale form -->
 {% if show_edit_form %}
 <div class="form-card">
@@ -98,4 +90,13 @@
 </div>
 {% endif %}
 
+<script>
+    // use today's date as placeholder
+    const d = new Date();
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    const today = `${year}-${month}-${day}`;
+    document.getElementById("date").value = today;
+</script>
 {% endblock %}

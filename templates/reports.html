@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Allied Ants Yoga Studio Management Interface</h1>
+<h1>Reports</h1>
 <div>
     <!-- user options -->
     <!-- every time user hits a button, page refreshes to display ONLY lastest requested info -->
@@ -60,19 +60,6 @@
         <!-- extra whitespace -->
         <p></p>
     {% endif %}
-    
-<script>
-    // use today's date as placeholder
-    const d = new Date();
-    const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, "0");
-    const day = String(d.getDate()).padStart(2, "0");
-    const today = `${year}-${month}-${day}`;
-    document.getElementById("rst").value = today;
-    document.getElementById("red").value = today;
-    document.getElementById("tst").value = today;
-    document.getElementById("ted").value = today;
-</script>
 
     <form action="/reports/teacher_KPI" method="get">
         <button class="btn" type="submit" value="Classes per teacher">Classes per teacher</button>
@@ -120,5 +107,19 @@
         </table>
     {% endif %}
 </div>
+
+    
+<script>
+    // use today's date as placeholder
+    const d = new Date();
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    const today = `${year}-${month}-${day}`;
+    document.getElementById("rst").value = today;
+    document.getElementById("red").value = today;
+    document.getElementById("tst").value = today;
+    document.getElementById("ted").value = today;
+</script>
 
 {% endblock %}
