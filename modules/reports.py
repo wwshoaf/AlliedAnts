@@ -34,3 +34,11 @@ def attendance_report():
     FROM Class
     ORDER BY attendance DESC
     """)
+
+def schedule_lookup(name, phone):
+    return fetch_all("""
+    SELECT class_date, class_time, class_type, duration
+    FROM teacherschedule
+    WHERE teacher_name = %s AND phone = %s
+    ORDER BY class_date ASC, class_time ASC
+    """, (name, phone))

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if person %}
+    <h1 style="padding: 30px;">Class Schedule For {{person}}, {{p}}</h1>
+    <!-- extra whitespace -->
+    <p></p>
+    <table>
+        <th>Class Date</th>
+        <th>Time</th>
+        <th>Type</th>
+        <th>Duration</th>
+        {% for r in schedule %}
+            <tr>
+                {% for x in r %}
+                    <td>{{ x }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
+
+{% endblock %}

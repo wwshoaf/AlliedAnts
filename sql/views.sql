@@ -1,7 +1,7 @@
-/*
-Write views, stored procedure/trigger, and transaction
-sql/views.sql · sql/procedures.sql · trigger: auto-update classes taught
-*/
+-- /*
+-- Write views, stored procedure/trigger, and transaction
+-- sql/views.sql · sql/procedures.sql · trigger: auto-update classes taught
+-- */
 
 DROP VIEW IF EXISTS ActiveEnrollments;
 DROP VIEW IF EXISTS CustomerPurchaseHistory;
@@ -20,9 +20,9 @@ SELECT
     pc.pc_time,
     c.duration,
     c.attendance
-FROM PersonClass pc
-JOIN Person p ON pc.name = p.name AND pc.phone = p.phone
-JOIN Class c ON pc.pc_date = c.class_date AND pc.pc_time = c.class_time;
+FROM personclass pc
+JOIN person p ON pc.name = p.name AND pc.phone = p.phone
+JOIN class c ON pc.pc_date = c.class_date AND pc.pc_time = c.class_time;
 
 
 -- View 2: Customer purchase history
@@ -40,8 +40,8 @@ SELECT
     s.price,
     s.payment_method,
     s.buyer
-FROM Sale s
-JOIN Person p ON s.name = p.name AND s.phone = p.phone
+FROM sale s
+JOIN person p ON s.name = p.name AND s.phone = p.phone
 ORDER BY s.sale_date DESC;
 
 -- View 3: Teacher schedule summary
@@ -57,8 +57,8 @@ SELECT
     c.class_time,
     c.class_type,
     c.duration
-FROM Teacher t
-JOIN Person p ON t.name = p.name AND t.phone = p.phone
-JOIN PersonClass pc ON t.name = pc.name AND t.phone = pc.phone
-JOIN Class c ON pc.pc_date = c.class_date AND pc.pc_time = c.class_time
+FROM teacher t
+JOIN person p ON t.name = p.name AND t.phone = p.phone
+JOIN personclass pc ON t.name = pc.name AND t.phone = pc.phone
+JOIN class c ON pc.pc_date = c.class_date AND pc.pc_time = c.class_time
 ORDER BY c.class_date, c.class_time;

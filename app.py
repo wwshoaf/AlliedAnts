@@ -186,6 +186,10 @@ def reports_page_teacher():
 def reports_page_attn():
     return render_template("reports.html", attn=reports.attendance_report())
 
+@app.route("/schedule/<name>/<phone>")
+def personclass(name, phone):
+    return render_template("details.html", person = name, p=phone, schedule = reports.schedule_lookup(name, phone))
+
 # run
 if __name__ == "__main__":
     app.run(debug=True)

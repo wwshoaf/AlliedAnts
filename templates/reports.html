@@ -73,9 +73,9 @@
         
         {% for r in teacher %}
             <tr>
-                {% for x in r %}
-                    <td>{{ x }}</td>
-                {% endfor %}
+                <td><a href="/schedule/{{r[0]}}/{{r[1]}}">{{ r[0] }}</a></td>
+                <td>{{ r[1] }}</td>
+                <td>{{ r[2] }}</td>
             </tr>
         {% endfor %}
         </table>
