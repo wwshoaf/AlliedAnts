@@ -26,11 +26,52 @@
             <td>
                 <a href="/customers/update/{{ name }}/{{ phone  }}">Edit</a>
                 <a href="/customers/delete/{{ name }}/{{ phone  }}"
-                onclick=""return confirm('Delete' {{ name  }}?)"">Delete</a>
+                onclick="return confirm('Delete {{ name  }}?')">Delete</a>
             </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
+{% if show_add_form %}
+<div class="form-card">
+    <h2>Add Customer</h2>
+    <form method="POST" action="/customers/add">
+        <label for="name">Full Name</label>
+        <input type="text" placeholder="e.g. John Smith" name="name" required>
+
+        <label for="phone">Phone</label>
+        <input type="text" placeholder="e.g. 5551234" name="phone" required>
+
+        <label for="email">Email</label>
+        <input type="email" placeholder="e.g. johnsmith@example.com" name="email" required>
+
+        <label for="payment">Payment Method</label>
+        <select name="payment">
+            <option value="annual">Annual</option>
+            <option value="monthly">Monthly</option>
+        </select>
+
+        <button type="submit" class="btn">Add Customer</button>
+        <a href="/customers" class="btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endif %}
+
+{% if show_update_form %}
+<div class="form-card">
+    <h2>Edit Customer -- {{ customer[0] }}</h2>
+    <form method="POST" action="/customers/update/{{ customer[0] }}/{{ customer[1] }}">
+        <label for="payment">Payment Method</label>
+        <select name="payment">
+            <option value="annual">Annual</option>
+            <option value="monthly">Monthly</option>
+        </select>
+
+        <button type="submit" class="btn">Update Payment Method</button>
+        <a href="/customers" class="btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endif %}
 
 {% endblock %}

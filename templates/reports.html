@@ -17,9 +17,11 @@
         <table>
             <tr>
                 <th>Transaction Counts</th>
-                <th>{{ rev[0] }}</th>
                 <th>Total Revenue</th>
-                <th>{{ rev[1] }}</th>
+            </tr>
+            <tr>
+                <td>{{ rev[0] }}</td>
+                <td>${{ "%.2f"|format(rev[1]) }}</td>
             </tr>
         </table>
         <!-- extra whitespace -->
@@ -36,12 +38,15 @@
     {% if trans %}
         <table>
             <tr>
-                <th>transaction_id</th>
-                <th>name</th>
-                <th>phone</th>
-                <th>date</th>
-                <th>time</th>
-                <th>amount</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Amount</th>
+                <th>Payment Method</th>
+                <th>Buyer</th>
+                <th>Sale Type</th>
             </tr>
         
         {% for r in trans %}

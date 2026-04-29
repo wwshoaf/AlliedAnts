@@ -16,6 +16,9 @@
             <th>Date</th>
             <th>Time</th>
             <th>Type</th>
+            <th>Duration</th>
+            <th>Attendance</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -24,6 +27,8 @@
             <td>{{ c[0] }}</td>
             <td>{{ c[1] }}</td>
             <td>{{ c[2] }}</td>
+            <td>{{ c[3] }}</td>
+            <td>{{ c[4] }}</td>
             <td>
                 <a href="/classes/{{ c[0] }}/{{ c[1] }}/enroll" class="btn btn-sm">Enroll Student</a>
                 <a href="/classes/{{ c[0] }}/{{ c[1] }}/drop" class="btn btn-sm btn-danger">Drop Student</a>
@@ -32,7 +37,7 @@
         </tr>
         {% else %}
         <tr>
-            <td colspan="4">No classes available</td>
+            <td colspan="6">No classes available</td>
         </tr>
         {% endfor %}
     </tbody>
@@ -54,7 +59,7 @@
         <input type="text" name="class_type" placeholder="e.g. Vinyasa, Hatha" required>
 
         <label>Duration(minutes)</label>
-        <input type="number" name="duration" required>
+        <input type="number" name="duration" placeholder="e.g. 60">
 
         <button type="submit" class="btn">Create Class</button>
         <a href="/classes" class="btn btn-secondary">Cancel</a>
