@@ -10,7 +10,7 @@ DROP TABLE IF EXISTS Teacher;
 DROP TABLE IF EXISTS Person;
 
 CREATE TABLE Person (
-   name VARCHAR(25) NOT NULL,
+   name VARCHAR(100) NOT NULL,
    phone VARCHAR(11) NOT NULL, 
    email VARCHAR(50) NOT NULL,
    PRIMARY KEY (name, phone)
@@ -21,7 +21,7 @@ CREATE TABLE Teacher (
    phone VARCHAR(11) NOT NULL, 
    number_of_classes_taught INT DEFAULT 0,
    PRIMARY KEY (name, phone),
-   FOREIGN KEY (name, phone) REFERENCES Person(name, phone)
+   FOREIGN KEY (name, phone) REFERENCES Person(name, phone) ON DELETE CASCADE
 );
 
 CREATE TABLE Customer (
@@ -29,7 +29,7 @@ CREATE TABLE Customer (
     phone VARCHAR(11) NOT NULL, 
     payment_method VARCHAR(50),
     PRIMARY KEY (name, phone),
-    FOREIGN KEY (name, phone) REFERENCES Person(name, phone)
+    FOREIGN KEY (name, phone) REFERENCES Person(name, phone) ON DELETE CASCADE
 );
 
 CREATE TABLE Class (
@@ -37,7 +37,7 @@ CREATE TABLE Class (
     class_time TIME NOT NULL,
     class_type VARCHAR(50) NOT NULL,
     duration INT,
-    attendance INT NOT NULL,
+    attendance INT NOT NULL DEFAULT 0,
     PRIMARY KEY (class_date, class_time)
 );
 
@@ -47,8 +47,8 @@ CREATE TABLE PersonClass (
     pc_date DATE NOT NULL,
     pc_time TIME NOT NULL,
     PRIMARY KEY (name, phone, pc_date, pc_time),
-    FOREIGN KEY (name, phone) REFERENCES Person(name, phone),
-    FOREIGN KEY (pc_date, pc_time) REFERENCES Class(class_date, class_time)
+    FOREIGN KEY (name, phone) REFERENCES Person(name, phone) ON DELETE CASCADE,
+    FOREIGN KEY (pc_date, pc_time) REFERENCES Class(class_date, class_time) ON DELETE CASCADE
 );
 
 CREATE TABLE Sale (
@@ -58,6 +58,11 @@ CREATE TABLE Sale (
     sale_date DATE,
     sale_time TIME,
     price DECIMAL(10, 2),
+    payment_method VARCHAR(50),
+    buyer VARCHAR(25),
+    type VARCHAR(50),
     PRIMARY KEY (transaction_id),
     FOREIGN KEY (name, phone) REFERENCES Customer(name, phone)
 );
+
+
