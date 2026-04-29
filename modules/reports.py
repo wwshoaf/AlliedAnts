@@ -13,7 +13,7 @@ def revenue_by_date(start, end):
 # detailed record of all transaction within a time period
 def all_trans(start, end):
     return fetch_all("""
-    SELECT * 
+    SELECT transaction_id, name, phone, sale_date, sale_time, price, payment_method, type
     FROM Sale
     WHERE sale_date >= %s AND sale_date <= %s
     ORDER BY sale_date, sale_time
