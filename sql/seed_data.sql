@@ -40,15 +40,15 @@ INSERT INTO Customer (name, phone, payment_method) VALUES
   ('Tyler Brooks',   '9995550210', 'monthly');
 
 INSERT INTO Class (class_date, class_time, class_type, duration, attendance) VALUES
-  ('2024-01-10', '09:00:00', 'Restore',    60, 20),
-  ('2024-01-11', '10:30:00', 'Barre',      45, 18),
-  ('2024-01-12', '12:00:00', 'Hot',        30, 22),
-  ('2024-01-13', '14:00:00', 'Yin',        60, 15),
-  ('2024-01-14', '16:00:00', 'Barre',      45, 25),
-  ('2024-01-15', '18:00:00', 'Hot',        30, 19),
-  ('2024-01-16', '19:30:00', 'Nidra',      60, 21),
-  ('2024-01-17', '08:00:00', 'Barre',      45, 23),
-  ('2024-01-18', '11:00:00', 'Restore',    30, 17);
+  ('2024-01-10', '09:00:00', 'Restore',    60, 3),
+  ('2024-01-11', '10:30:00', 'Barre',      45, 2),
+  ('2024-01-12', '12:00:00', 'Hot',        30, 2),
+  ('2024-01-13', '14:00:00', 'Yin',        60, 2),
+  ('2024-01-14', '16:00:00', 'Barre',      45, 2),
+  ('2024-01-15', '18:00:00', 'Hot',        30, 2),
+  ('2024-01-16', '19:30:00', 'Nidra',      60, 2),
+  ('2024-01-17', '08:00:00', 'Barre',      45, 2),
+  ('2024-01-18', '11:00:00', 'Restore',    30, 2);
 
 INSERT INTO PersonClass (name, phone, pc_date, pc_time) VALUES
   -- Teachers linked to the classes they instruct
@@ -73,14 +73,14 @@ INSERT INTO PersonClass (name, phone, pc_date, pc_time) VALUES
   ('Fatima Hassan',  '6795550209', '2024-01-13', '14:00:00'),
   ('Tyler Brooks',   '9995550210', '2024-01-18', '11:00:00');
 
-INSERT INTO Sale (transaction_id, name, phone, sale_date, sale_time, price) VALUES
-  (1,  'Jordan Mills',   '3045550201', '2024-01-10', '09:00:00', 199.99),
-  (2,  'Alex Turner',    '1165550202', '2024-01-11', '10:30:00', 500.00),
-  (3,  'Priya Patel',    '5525550203', '2024-01-12', '12:00:00',  18.99),
-  (4,  'Sam Nguyen',     '1805550204', '2024-01-13', '14:00:00',  18.99),
-  (5,  'Chloe Anderson', '4125550205', '2024-01-14', '16:00:00',  15.00),
-  (6,  'Malik Johnson',  '3045550206', '2024-01-15', '18:00:00',  20.00),
-  (7,  'Elena Vasquez',  '9015550207', '2024-01-16', '19:30:00', 500.00),
-  (8,  'Ryan OBrien',    '6875550208', '2024-01-17', '08:00:00',  22.99),
-  (9,  'Fatima Hassan',  '6795550209', '2024-01-18', '11:00:00',  23.00),
-  (10, 'Tyler Brooks',   '9995550210', '2024-01-10', '09:00:00',  45.00);
+INSERT INTO Sale (transaction_id, name, phone, sale_date, sale_time, price, payment_method, buyer, type) VALUES
+  (1,  'Jordan Mills',   '3045550201', '2024-01-10', '09:00:00', 199.99, 'annual', 'Jordan Mills', 'class'),
+  (2,  'Alex Turner',    '1165550202', '2024-01-11', '10:30:00', 500.00, 'monthly', 'Alex Turner', 'class'),
+  (3,  'Priya Patel',    '5525550203', '2024-01-12', '12:00:00',  18.99, 'annual', 'Priya Patel', 'class'),
+  (4,  'Sam Nguyen',     '1805550204', '2024-01-13', '14:00:00',  18.99, 'annual', 'Sam Nguyen', 'class'),
+  (5,  'Chloe Anderson', '4125550205', '2024-01-14', '16:00:00',  15.00, 'monthly', 'Chloe Anderson', 'class'),
+  (6,  'Malik Johnson',  '3045550206', '2024-01-15', '18:00:00',  20.00, 'annual', 'Malik Johnson', 'class'),
+  (7,  'Elena Vasquez',  '9015550207', '2024-01-16', '19:30:00', 500.00, 'monthly', 'Elena Vasquez', 'class'),
+  (8,  'Ryan OBrien',    '6875550208', '2024-01-17', '08:00:00',  22.99, 'monthly', 'Ryan OBrien', 'class'),
+  (9,  'Fatima Hassan',  '6795550209', '2024-01-18', '11:00:00',  23.00, 'annual', 'Fatima Hassan', 'class'),
+  (10, 'Tyler Brooks',   '9995550210', '2024-01-10', '09:00:00',  45.00, 'monthly', 'Tyler Brooks', 'class');
