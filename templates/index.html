@@ -1,5 +1,21 @@
-{% extends "base.html" %}
-{% block content %}
+<!-- {% extends "base.html" %} -->
+<!-- {% block content %} -->
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+<nav>
+    <a href="/">Home</a>
+    <a href="/customers">Customers</a>
+    <a href="/teachers">Teachers</a>
+    <a href="/classes">Classes</a>
+    <a href="/sales">Sales</a>
+    <a href="/reports">Reports</a>
+</nav>
+<div style="background-image: url('/static/image (1).png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 2rem;
+    min-height: 100vh;">
+<main>
 <h1>Allied Ants Yoga Studio Management Interface</h1>
 <p>Please select your desired section</p>
 
@@ -13,5 +29,5 @@
     <a class = "btn" href="/classes">Classes</a>
     <a class = "btn" href="/sales">Sales</a>
     <a class = "btn" href="/reports">Reports</a>
-</div>"
-{% endblock %}
+</div></main></div>
+<!-- {% endblock %} -->

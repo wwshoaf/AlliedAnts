@@ -11,10 +11,10 @@
 <table>
     <thead>
         <tr>
+            <th>ID</th>
             <th>Date</th>
             <th>Customer</th>
             <th>Amount</th>
-            <th>Description</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -44,10 +44,10 @@
     <h2>Add Sale</h2>
     <form method="POST" action="/sales/add">
         <label>Date</label>
-        <input type="date" name="sale_date" required>
+        <input type="date" id="date" name="sale_date" required>
 
         <label>Time (optional)</label>
-        <input type="time" name="sale_time">
+        <input type="time" id='time' name="sale_time">
 
         <label>Customer Name</label>
         <input type="text" name="customer_name" placeholder="Full name" required>
@@ -72,7 +72,15 @@
     </form>
 </div>
 {% endif %}
-
+<script>
+    // use today's date as placeholder
+    const d = new Date();
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    const today = `${year}-${month}-${day}`;
+    document.getElementById("date").value = today;
+</script>
 <!-- Edit sale form -->
 {% if show_edit_form %}
 <div class="form-card">
