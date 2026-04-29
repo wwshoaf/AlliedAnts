@@ -27,23 +27,23 @@ def add_customer():
         success, msg = persons.add_customer(name, phone, email, payment)
         flash(msg, "success" if success else "error")
         return redirect(url_for("customers"))
-    return render_template("add_customer.html")
+    return render_template("customers.html", customers=[], show_add_form=True)
 
 @app.route("/customers/delete/<name>/<phone>")
 def delete_customer(name, phone):
-    _, msg = persons.delete_person(name, phone)
-    flash(msg, "success")
+    success, msg = persons.delete_person(name, phone)
+    flash(msg, "success" if success else "error")
     return redirect(url_for("customers"))
 
 @app.route("/customers/update/<name>/<phone>", methods = ["GET", "POST"])
 def update_customer(name, phone):
     if request.method == "POST":
         new_payment = request.form["payment"]
-        _, msg = persons.update_payment_method(name, phone, new_payment)
-        flash(msg, "success")
+        success, msg = persons.update_payment_method(name, phone, new_payment)
+        flash(msg, "success" if success else "error")
         return redirect(url_for("customers"))
     customer = persons.get_person(name, phone)
-    return render_template("update_customer.html", customer = customer)
+    return render_template("customers.html", customers = persons.list_customers(), show_update_form=True, customer=customer)
 
 # teachers
 @app.route("/teachers")
@@ -60,7 +60,7 @@ def add_teacher():
         success, msg = persons.add_teacher(name, phone, email)
         flash(msg, "success" if success else "error")
         return redirect(url_for("teachers"))
-    return render_template("add_teacher.html")
+    return render_template("teachers.html", teachers=persons.list_teachers(), show_add_form=True)
 
 # classes
 @app.route("/classes")
@@ -127,7 +127,10 @@ def add_sale():
             phone=request.form["customer_phone"],
             sale_date=request.form["sale_date"],
             sale_time=request.form.get("sale_time", "00:00"),
-            price=request.form["amount"]
+            price=request.form["amount"],
+            payment_method=request.form.get("payment_method"),
+            buyer=request.form.get("buyer"),
+            sale_type=request.form.get("sale_type"),
         )
         flash(msg, "success" if success else "error")
         return redirect(url_for("sales_list"))
