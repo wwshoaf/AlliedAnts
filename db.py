@@ -51,14 +51,14 @@ def fetch_all(query, params = None):
     conn = get_connection()
 
     if not conn:
-        return None
+        return []
     try:
         cursor = conn.cursor()
         cursor.execute(query, params or ())
         return cursor.fetchall()
     except Error as e:
         print(f"[DB Error] Query failed: {e}")
-        return None
+        return []
     finally:
         conn.close()
 
