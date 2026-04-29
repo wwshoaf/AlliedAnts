@@ -3,22 +3,26 @@ Write views, stored procedure/trigger, and transaction
 sql/views.sql · sql/procedures.sql · trigger: auto-update classes taught
 */
 
+DROP VIEW IF EXISTS ActiveEnrollments;
+DROP VIEW IF EXISTS CustomerPurchaseHistory;
+DROP VIEW IF EXISTS TeacherSchedule;
+
 -- View 1: active enrollments
 -- show all current student-class pairings with details
 -- use in enrollment page and attendance reports
 CREATE VIEW ActiveEnrollments AS
 SELECT
-    pc.Name,
-    pc.Phone,
-    p.Email,
-    c.Type AS ClassType,
-    pc.Date,
-    pc.Time,
-    c.Duration,
-    pc.Attendance
+    pc.name,
+    pc.phone,
+    p.email,
+    c.class_type,
+    pc.pc_date,
+    pc.pc_time,
+    c.duration,
+    c.attendance
 FROM PersonClass pc
-JOIN Person p ON pc.Name = p.Name AND pc.Phone = p.Phone
-JOIN Class c ON pc.Date = c.Date AND pc.Time = c.Time;
+JOIN Person p ON pc.name = p.name AND pc.phone = p.phone
+JOIN Class c ON pc.pc_date = c.class_date AND pc.pc_time = c.class_time;
 
 
 -- View 2: Customer purchase history
@@ -26,32 +30,35 @@ JOIN Class c ON pc.Date = c.Date AND pc.Time = c.Time;
 -- use for customer history report
 CREATE VIEW CustomerPurchaseHistory AS
 SELECT
-    s.TransactionNumber,
-    s.Name AS BuyerName,
-    s.Phone AS BuyerPhone,
-    p.Email,
-    s.Type AS SaleType,
-    s.Date,
-    s.Price,
-    s.PaymentMethod
+    s.transaction_id,
+    s.name AS buyer_name,
+    s.phone AS buyer_phone,
+    p.email,
+    s.type AS sale_type,
+    s.sale_date,
+    s.sale_time,
+    s.price,
+    s.payment_method,
+    s.buyer
 FROM Sale s
-JOIN Person p ON s.Name = p.Name AND s.Phone = p.Phone
-ORDER BY s.Date DESC;
+JOIN Person p ON s.name = p.name AND s.phone = p.phone
+ORDER BY s.sale_date DESC;
 
 -- View 3: Teacher schedule summary
 -- shows each teacher with the classes they are scheduled for
 -- use for teacher page and reports
 CREATE VIEW TeacherSchedule AS
 SELECT
-    p.Name AS TeacherName,
-    p.Phone,
-    p.Email,
-    t.NumberOfClassesTaught,
-    c.Date,
-    c.Time,
-    c.Type AS ClassType,
-    c.Duration
+    p.name AS teacher_name,
+    p.phone,
+    p.email,
+    t.number_of_classes_taught,
+    c.class_date,
+    c.class_time,
+    c.class_type,
+    c.duration
 FROM Teacher t
-JOIN Person p ON t.Name = p.Name AND t.Phone = p.Phone
-JOIN Class c ON t.Name = c.Name AND t.Phone = c.Phone;
-ORDER BY c.Date, c.Time;
+JOIN Person p ON t.name = p.name AND t.phone = p.phone
+JOIN PersonClass pc ON t.name = pc.name AND t.phone = pc.phone
+JOIN Class c ON pc.pc_date = c.class_date AND pc.pc_time = c.class_time
+ORDER BY c.class_date, c.class_time;
