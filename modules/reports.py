@@ -9,6 +9,9 @@ def revenue_by_date(start, end):
     FROM Sale
     WHERE sale_date >= %s AND sale_date <= %s
     """, (start,end))
+    if result:
+        return result[0], float(result[1])
+    return None
 
 # detailed record of all transaction within a time period
 def all_trans(start, end):
