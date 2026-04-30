@@ -50,11 +50,14 @@ def class_enrollment(date, time):
     SELECT name, phone, email
     FROM activeenrollments
     WHERE pc_date = %s AND pc_time = %s
+    ORDER BY name ASC
     """, (date, time))
 
+# look up a person's shopping history
 def trans_history(name, phone):
     return fetch_all("""
     SELECT transaction_id, sale_date, sale_time, sale_type, price, payment_method
     FROM customerpurchasehistory
     WHERE buyer_name = %s AND buyer_phone = %s
+    ORDER BY transaction_id
     """, (name, phone))
