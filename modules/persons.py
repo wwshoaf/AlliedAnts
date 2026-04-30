@@ -48,17 +48,16 @@ def add_customer(name, phone, email, payment):
     return True, f"customer {name} added successfully"
 
 
-def add_teacher(name, phone, number_of_classes_taught=0):
+def add_teacher(name, phone, email):
     if get_person(name, phone):
         return False, "Teacher already exists"
-    # Insert with empty email since email is required in schema
     execute_query(
-        "INSERT INTO person (name, phone, email) VALUES (%s, %s, '')",
-        (name, phone)
+        "INSERT INTO person (name, phone, email) VALUES (%s, %s, %s)",
+        (name, phone, email)
     )
     execute_query(
-        "INSERT INTO teacher (name, phone, number_of_classes_taught) VALUES (%s, %s, %s)",
-        (name, phone, number_of_classes_taught)
+        "INSERT INTO teacher (name, phone, number_of_classes_taught) VALUES (%s, %s, 0)",
+        (name, phone)
     )
     return True, f"Teacher {name} added successfully"
 
