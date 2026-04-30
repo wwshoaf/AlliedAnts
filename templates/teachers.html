@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="page-header">
+    <h1>Teachers</h1>
+    <a href="/teachers/add" class="btn">+ Add Teacher</a>
+</div>
+
+<!-- teacher list -->
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Classes Taught</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for t in teachers %}
+        <tr>
+            <td>{{ t[0] }}</td>
+            <td>{{ t[1] }}</td>
+            <td>{{ t[3] }}</td>
+            <td>
+                <a href="/teachers/{{ t[0] }}/{{ t[1] }}/edit" class="btn btn-sm">Edit</a>
+                <a href="/teachers/{{ t[0] }}/{{ t[1] }}/delete" class="btn btn-sm btn-danger" onclick="return confirm('Delete {{ t[0] }}?')">Delete</a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="4">No teachers available</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% if show_add_form %}
+<div class="form-card">
+    <h2>Add Teacher</h2>
+    <form method="POST" action="/teachers/add">
+        <label>Name</label>
+        <input type="text" name="name" required>
+
+        <label>Phone</label>
+        <input type="text" name="phone" required>
+
+		<label>Classes Taught</label>
+        <input type="number" name="classes" default="0" min="0" required>
+
+        <button type="submit" class="btn">Add Teacher</button>
+        <a href="/teachers" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endif %}
+
+{% if show_edit_form %}
+<div class="form-card">
+    <h2>Edit Teacher: {{ edit_name }}</h2>
+    <form method="POST" action="/teachers/{{ edit_name }}/{{ edit_phone }}/edit">
+        <label>Name</label>
+        <input type="text" name="name" value="{{ edit_name }}" required>
+
+        <label>Phone</label>
+        <input type="text" name="phone" value="{{ edit_phone }}" required>
+
+        <label>Classes Taught</label>
+        <input type="number" name="classes" value="{{ edit_classes_taught }}" min="0" required>
+
+        <button type="submit" class="btn">Save Changes</button>
+        <a href="/teachers" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endif %}
+
+{% endblock %}
