@@ -1,9 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
 
-<!-- only ONE kind of these details will be display at a time -->
 
- <!-- entered from reports page -->
+ <!-- entered from reports or customers' page -->
 {% if person %}
     <h1 style="padding: 30px;">Class Schedule For {{person}}, {{p}}</h1>
     <!-- extra whitespace -->
@@ -21,6 +20,8 @@
             </tr>
         {% endfor %}
     </table>
+    <!-- extra whitespace -->
+    <p style="padding:20px;"></p>
 {% endif %}
 
 <!-- entered from reports page -->
@@ -46,7 +47,7 @@
 
 <!-- entered from customers' page -->
 {% if buyer_name %}
-    <h1 style="padding: 30px;">Transaction History For {{buyer_name}}, {{buyer_phone}}</h1>
+    <h1 style="padding: 10px;">Transaction History</h1>
     <!-- extra whitespace -->
     <p></p>
     <table>

@@ -47,21 +47,19 @@ FROM sale s
 JOIN person p ON s.name = p.name AND s.phone = p.phone
 ORDER BY s.sale_date DESC;
 
--- View 3: Teacher schedule summary
--- shows each teacher with the classes they are scheduled for
--- use for teacher page and reports
-CREATE VIEW TeacherSchedule AS
+-- View 3:  schedule summary
+-- shows each person with the classes they are scheduled for
+-- use for customer page and reports
+CREATE VIEW Schedule AS
 SELECT
-    p.name AS teacher_name,
+    p.name,
     p.phone,
     p.email,
-    t.number_of_classes_taught,
     c.class_date,
     c.class_time,
     c.class_type,
     c.duration
-FROM teacher t
-JOIN person p ON t.name = p.name AND t.phone = p.phone
-JOIN personclass pc ON t.name = pc.name AND t.phone = pc.phone
+FROM person p 
+JOIN personclass pc ON p.name = pc.name AND p.phone = pc.phone
 JOIN class c ON pc.pc_date = c.class_date AND pc.pc_time = c.class_time
 ORDER BY c.class_date, c.class_time;

@@ -238,7 +238,8 @@ def enrollment_lookup(d, t, tp):
 # to be called from customers' page. 
 @app.route("/history/<name>/<phone>")
 def trans_history_lookup(name, phone):
-    return render_template("details.html", buyer_name = name, buyer_phone = phone, history = reports.trans_history(name, phone))
+    return render_template("details.html", buyer_name = name, history = reports.trans_history(name, phone),
+                           person = name, p = phone, schedule = reports.schedule_lookup(name, phone))
 
 # run
 if __name__ == "__main__":

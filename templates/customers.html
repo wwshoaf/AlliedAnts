@@ -19,7 +19,7 @@
     <tbody>
         {% for name, phone, email, payment in customers %}
         <tr>
-            <!-- click to see all the transactions made by this person -->
+            <!-- click to see class schedule of this person and all the transactions made by this person -->
             <td><a href="/history/{{name}}/{{phone}}">{{ name }}</a></td>
             <td>{{ phone }}</td>
             <td>{{ email }}</td>

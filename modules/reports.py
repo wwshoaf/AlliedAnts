@@ -39,8 +39,8 @@ def attendance_report():
 def schedule_lookup(name, phone):
     return fetch_all("""
     SELECT class_date, class_time, class_type, duration
-    FROM teacherschedule
-    WHERE teacher_name = %s AND phone = %s
+    FROM schedule
+    WHERE name = %s AND phone = %s
     ORDER BY class_date ASC, class_time ASC
     """, (name, phone))
 
@@ -50,7 +50,7 @@ def class_enrollment(date, time):
     SELECT name, role, phone, email
     FROM activeenrollments
     WHERE pc_date = %s AND pc_time = %s
-    ORDER BY name ASC
+    ORDER BY role DESC, name ASC
     """, (date, time))
 
 # look up a person's shopping history
