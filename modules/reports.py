@@ -47,7 +47,7 @@ def schedule_lookup(name, phone):
 # see the list of persons enrolled in a class
 def class_enrollment(date, time):
     return fetch_all("""
-    SELECT name, phone, email
+    SELECT name, role, phone, email
     FROM activeenrollments
     WHERE pc_date = %s AND pc_time = %s
     ORDER BY name ASC

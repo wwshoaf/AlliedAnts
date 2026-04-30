@@ -43,6 +43,7 @@ CREATE TABLE Class (
 
 CREATE TABLE PersonClass (
     name VARCHAR(25) NOT NULL,
+    role VARCHAR(20) NOT NULL,
     phone VARCHAR(11) NOT NULL, 
     pc_date DATE NOT NULL,
     pc_time TIME NOT NULL,

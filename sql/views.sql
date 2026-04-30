@@ -13,6 +13,7 @@ DROP VIEW IF EXISTS TeacherSchedule;
 CREATE VIEW ActiveEnrollments AS
 SELECT
     pc.name,
+    pc.role,
     pc.phone,
     p.email,
     c.class_type,
