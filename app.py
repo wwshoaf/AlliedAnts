@@ -58,12 +58,8 @@ def add_teacher():
     if request.method == "POST":
         name = request.form["name"]
         phone = request.form["phone"]
-        classes_taught = request.form.get("classes")
-        try:
-            number_of_classes_taught = int(classes_taught) if classes_taught is not None and classes_taught != '' else 0
-        except ValueError:
-            number_of_classes_taught = 0
-        success, msg = persons.add_teacher(name, phone, number_of_classes_taught)
+        email = request.form["email"]
+        success, msg = persons.add_teacher(name, phone, email)
         flash(msg, "success" if success else "error")
         return redirect(url_for("teachers"))
     return render_template("teachers.html", teachers=persons.list_teachers(), show_add_form=True)
