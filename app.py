@@ -46,6 +46,8 @@ def update_customer(name, phone):
     return render_template("customers.html", customers = persons.list_customers(), show_update_form=True, customer=customer)
 
 # teachers
+
+# teachers
 @app.route("/teachers")
 def teachers():
     rows = persons.list_teachers()
@@ -56,11 +58,54 @@ def add_teacher():
     if request.method == "POST":
         name = request.form["name"]
         phone = request.form["phone"]
-        email = request.form["email"]
-        success, msg = persons.add_teacher(name, phone, email)
+        classes_taught = request.form.get("classes")
+        try:
+            number_of_classes_taught = int(classes_taught) if classes_taught is not None and classes_taught != '' else 0
+        except ValueError:
+            number_of_classes_taught = 0
+        success, msg = persons.add_teacher(name, phone, number_of_classes_taught)
         flash(msg, "success" if success else "error")
         return redirect(url_for("teachers"))
     return render_template("teachers.html", teachers=persons.list_teachers(), show_add_form=True)
+
+@app.route("/teachers/<name>/<phone>/edit", methods=["GET", "POST"])
+def edit_teacher(name, phone):
+    teacher = persons.get_person(name, phone)
+    if not teacher:
+        flash("Teacher not found", "error")
+        return redirect(url_for("teachers"))
+    if request.method == "POST":
+        new_name = request.form["name"]
+        new_phone = request.form["phone"]
+        classes_taught = request.form.get("classes")
+        try:
+            number_of_classes_taught = int(classes_taught) if classes_taught is not None and classes_taught != '' else 0
+        except ValueError:
+            number_of_classes_taught = 0
+        success, msg = persons.update_teacher(name, phone, new_name, new_phone, number_of_classes_taught)
+        flash(msg, "success" if success else "error")
+        return redirect(url_for("teachers"))
+    # Get current number_of_classes_taught for the teacher
+    teacher_row = None
+    for t in persons.list_teachers():
+        if t[0] == name and t[1] == phone:
+            teacher_row = t
+            break
+    edit_classes_taught = teacher_row[3] if teacher_row else 0
+    return render_template(
+        "teachers.html",
+        teachers=persons.list_teachers(),
+        show_edit_form=True,
+        edit_name=name,
+        edit_phone=phone,
+        edit_classes_taught=edit_classes_taught
+    )
+
+@app.route("/teachers/<name>/<phone>/delete")
+def delete_teacher(name, phone):
+    success, msg = persons.delete_person(name, phone)
+    flash(msg, "success" if success else "error")
+    return redirect(url_for("teachers"))
 
 # classes
 @app.route("/classes")
