@@ -194,6 +194,11 @@ def schedule_lookup(name, phone):
 def enrollment_lookup(d, t, tp):
     return render_template("details.html", date = d, time=t, class_type = tp, enrollment = reports.class_enrollment(d,t))
 
+# to be called from customers' page. 
+@app.route("/history/<name>/<phone>")
+def trans_history_lookup(name, phone):
+    return render_template("details.html", buyer_name = name, buyer_phone = phone, history = reports.trans_history(name, phone))
+
 # run
 if __name__ == "__main__":
     app.run(debug=True)

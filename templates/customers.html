@@ -19,7 +19,7 @@
     <tbody>
         {% for name, phone, email, payment in customers %}
         <tr>
-            <td>{{ name }}</td>
+            <td><a href="/history/{{name}}/{{phone}}">{{ name }}</a></td>
             <td>{{ phone }}</td>
             <td>{{ email }}</td>
             <td>{{ payment }}</td>

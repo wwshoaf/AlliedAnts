@@ -39,4 +39,25 @@
     </table>
 {% endif %}
 
+{% if buyer_name %}
+    <h1 style="padding: 30px;">Transaction History For {{buyer_name}}, {{buyer_phone}}</h1>
+    <!-- extra whitespace -->
+    <p></p>
+    <table>
+        <th>Transaction id</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Purchase Type</th>
+        <th>Amount</th>
+        <th>Payment Method</th>
+        {% for r in history %}
+            <tr>
+                {% for x in r %}
+                    <td>{{ x }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+
 {% endblock %}
