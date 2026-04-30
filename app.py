@@ -187,8 +187,12 @@ def reports_page_attn():
     return render_template("reports.html", attn=reports.attendance_report())
 
 @app.route("/schedule/<name>/<phone>")
-def personclass(name, phone):
+def schedule_lookup(name, phone):
     return render_template("details.html", person = name, p=phone, schedule = reports.schedule_lookup(name, phone))
+
+@app.route("/enrollment/<d>/<t>/<tp>")
+def enrollment_lookup(d, t, tp):
+    return render_template("details.html", date = d, time=t, class_type = tp, enrollment = reports.class_enrollment(d,t))
 
 # run
 if __name__ == "__main__":

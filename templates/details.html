@@ -20,5 +20,23 @@
     </table>
 {% endif %}
 
+{% if date %}
+    <h1>Class Enrollment List For</h1>
+    <h1 style="padding: 30px;text-indent: 20px;"><u>{{class_type}}</u> on {{date}} at {{time}}</h1>
+    <!-- extra whitespace -->
+    <p></p>
+    <table>
+        <th>Attendee Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        {% for r in enrollment %}
+            <tr>
+                {% for x in r %}
+                    <td>{{ x }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
 
 {% endblock %}

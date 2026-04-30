@@ -35,6 +35,7 @@ def attendance_report():
     ORDER BY attendance DESC
     """)
 
+# look up anyone's class schedule
 def schedule_lookup(name, phone):
     return fetch_all("""
     SELECT class_date, class_time, class_type, duration
@@ -42,3 +43,11 @@ def schedule_lookup(name, phone):
     WHERE teacher_name = %s AND phone = %s
     ORDER BY class_date ASC, class_time ASC
     """, (name, phone))
+
+# see the list of persons enrolled in a class
+def class_enrollment(date, time):
+    return fetch_all("""
+    SELECT name, phone, email
+    FROM activeenrollments
+    WHERE pc_date = %s AND pc_time = %s
+    """, (date, time))

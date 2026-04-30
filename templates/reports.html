@@ -98,9 +98,11 @@
         
         {% for r in attn %}
             <tr>
-                {% for x in r %}
-                    <td>{{ x }}</td>
-                {% endfor %}
+                <td>{{ r[0] }}</td>
+                <td>{{ r[1] }}</td>
+                <td><a href="/enrollment/{{r[0]}}/{{r[1]}}/{{r[2]}}">{{ r[2] }}</a></td>
+                <td>{{ r[3] }}</td>
+                <td>{{ r[4] }}</td>
             </tr>
         {% endfor %}
         </table>
