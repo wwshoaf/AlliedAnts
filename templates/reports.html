@@ -60,31 +60,9 @@
         <p></p>
     {% endif %}
 
-    <form action="/reports/teacher_KPI" method="get">
-        <button class="btn" type="submit" value="Classes per teacher">Classes per teacher</button>
-    </form>
-    {% if teacher %}
-        <table>
-            <tr>
-                <th>name</th>
-                <th>phone</th>
-                <th>number_of_classes_taught</th>
-            </tr>
-        
-        {% for r in teacher %}
-            <tr>
-                <td><a href="/schedule/{{r[0]}}/{{r[1]}}">{{ r[0] }}</a></td>
-                <td>{{ r[1] }}</td>
-                <td>{{ r[2] }}</td>
-            </tr>
-        {% endfor %}
-        </table>
-        <!-- extra whitespace -->
-        <p></p>
-    {% endif %}
 
     <form action="/reports/attn" method="get">
-        <button  class="btn" type="submit" value="Attendance lookup">Attendance lookup</button>
+        <button  class="btn" type="submit" value="Attendance lookup">Class Attendance Summary</button>
     </form>
     {% if attn %}
         <table>
@@ -100,6 +78,7 @@
             <tr>
                 <td>{{ r[0] }}</td>
                 <td>{{ r[1] }}</td>
+                <!-- click to see the enrollment list of this class -->
                 <td><a href="/enrollment/{{r[0]}}/{{r[1]}}/{{r[2]}}">{{ r[2] }}</a></td>
                 <td>{{ r[3] }}</td>
                 <td>{{ r[4] }}</td>

@@ -20,7 +20,8 @@
     <tbody>
         {% for t in teachers %}
         <tr>
-            <td>{{ t[0] }}</td>
+            <!-- click to see the teaching schedule of this person -->
+            <td><a href="/schedule/{{t[0]}}/{{t[1]}}">{{ t[0] }}</a></td>
             <td>{{ t[1] }}</td>
             <td>{{ t[3] }}</td>
             <td>
