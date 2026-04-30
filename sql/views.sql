@@ -3,6 +3,8 @@
 -- sql/views.sql · sql/procedures.sql · trigger: auto-update classes taught
 -- */
 
+-- comment for testing 
+
 DROP VIEW IF EXISTS ActiveEnrollments;
 DROP VIEW IF EXISTS CustomerPurchaseHistory;
 DROP VIEW IF EXISTS TeacherSchedule;
