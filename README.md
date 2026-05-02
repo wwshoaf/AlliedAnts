@@ -34,6 +34,8 @@ Step 2:
     - this makes views for the tables
 4. sql/procedures.sql
     - this makes the EnrollStudent() procedure
+5. sql/indexes.sql
+    - this makes an index for Teacher table
 
 Step 3: 
 - Make a venv and install dependencies
@@ -56,7 +58,7 @@ AlliedAnts/
 │  ├─ reports.py # Sale CRUD
 │  └─ sales.py   # Report queries
 ├─ sql/
-│  ├─ indexes.sql    # 
+│  ├─ indexes.sql    # index creation for number of classes taught
 │  ├─ procedures.sql # stored procedure
 │  ├─ schema.sql     # Create tables
 │  ├─ seed_data.sql  # Add values to tables
