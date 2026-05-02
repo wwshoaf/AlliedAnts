@@ -1,0 +1,4 @@
+"Table","Non_unique","Key_name","Seq_in_index","Column_name","Collation","Cardinality","Sub_part","Packed","Null","Index_type","Comment","Index_comment","Visible","Expression"
+"Teacher",0,"PRIMARY",1,"name","A","5","","","","BTREE","","","YES",""
+"Teacher",0,"PRIMARY",2,"phone","A","5","","","","BTREE","","","YES",""
+"Teacher",1,"idx_teacher_classes",1,"number_of_classes_taught","A","5","","","YES","BTREE","","","YES",""
