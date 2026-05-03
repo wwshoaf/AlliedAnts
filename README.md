@@ -73,7 +73,7 @@ AlliedAnts/
 │  ├─ base.html         # shared layout
 │  ├─ classes.html      # classes and enrollment
 │  ├─ customers.html 
-│  ├─ details.html      # 
+│  ├─ details.html      
 │  ├─ index.html        # dashboard
 │  ├─ reports.html  
 │  ├─ sales.html
