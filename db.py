@@ -1,5 +1,5 @@
-## Write db.py connection helper
-## get_connection() with DB_CONFIG · used by every module
+## db.py connection helper
+## get_connection() with DB_CONFIG
 
 import mysql.connector
 from mysql.connector import Error
@@ -7,7 +7,6 @@ from mysql.connector import Error
 # Databse connection settings
 # set this to your own local settings
 # or you can make a new local db in mysql with the same settings
-# we will change this to a .env file later if we make github repo public, shouldnt matter too much though if you have your sql set so there is no remote in
 DB_CONFIG = {
     "host": "localhost",
     "user": "allied_ant",
